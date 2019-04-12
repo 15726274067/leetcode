@@ -62,15 +62,15 @@ class Solution {
     }
 
     public String gen(String str){
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
         int i = 0, count = 1;
 
         while (i < str.length()) {
-            String curr = str.substring(i, i+1);
-            while (i<str.length()-1 && curr.equals(str.substring(++i, i+1)) ) {
+            while (i<str.length()-1 && str.charAt(i) == str.charAt(i+1)) {
                 count++;
+                i++;
             }
-            ret.append(count).append(curr);
+            ret.append(count).append(str.charAt(i));
         }
         return ret.toString();
     }
