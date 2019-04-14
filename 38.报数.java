@@ -53,26 +53,25 @@ import java.util.HashMap;
  */
 class Solution {
     public String countAndSay(int n) {
-        HashMap<Integer, String> map = new HashMap<Integer, String>(n);
-        map.put(1, "1");
-        for (int i = 1; i < n; i++) {
-          map.put(i + 1, gen(map.get(i)));
+        if (n <= 1) {
+            return "1";
         }
-        return map.get(n);
-    }
-
-    public String gen(String str){
-        StringBuilder ret = new StringBuilder();
-        int i = 0, count = 1;
-
-        while (i < str.length()) {
-            while (i<str.length()-1 && str.charAt(i) == str.charAt(i+1)) {
-                count++;
-                i++;
+        String count = countAndSay(n-1);
+        char target = count.charAt(0);
+        int countNum = 1;
+        StringBuffer result = new StringBuffer();
+        for(int i=1; i<count.length(); i++) {
+            char temp = count.charAt(i);
+            if (target == temp) {
+                countNum++;
+            } else {
+                result.append(countNum).append(target);
+                target = temp;
+                countNum = 1;
             }
-            ret.append(count).append(str.charAt(i));
         }
-        return ret.toString();
+        result.append(countNum).append(target);
+        return result.toString();
     }
 }
 
